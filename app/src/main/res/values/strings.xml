@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">MV01P22024</string>
+    <string name="IngresoNombre">Ingrese su nombre</string>
+    <string name="IngresoApellidos">Ingrese su apellido</string>
+    <string name="Formulario">Formulario de Ingreso</string>
+    <string name="IngresoEdad">Ingrese su Edad</string>
+    <string name="IngresoCorreo">Ingrese su Correo</string>
 </resources>
