@@ -47,6 +47,6 @@ public class ActivityInit extends AppCompatActivity
 
     private void Agregar()
     {
-        Toast.makeText(this, "Hola como estas!!!!", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Hola como estas!!!!"+nombres.getText(), Toast.LENGTH_LONG).show();
     }
 }
