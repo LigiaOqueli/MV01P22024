@@ -3,6 +3,7 @@ package com.example.mv01p22024;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import androidx.activity.EdgeToEdge;
@@ -22,9 +23,12 @@ public class ActivityList extends AppCompatActivity {
     SQLLiteConexion conexion;
     ListView listperson;
     ArrayList<Personas> lista;
+    //crear un arreglo de string para poder declarar
+    ArrayList<String> Arreglo;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_list);
@@ -39,10 +43,14 @@ public class ActivityList extends AppCompatActivity {
 
         ObtenerInfo();
 
+        //llenar objeto de lista
+        ArrayAdapter adp = new ArrayAdapter(this, android.R.layout.simple_list_item_1, Arreglo);
+        listperson.setAdapter(adp);
 
     }
 
     private void ObtenerInfo() {
+        //conexion a la bd
         SQLiteDatabase db = conexion.getReadableDatabase();
         //declarar objeto
         Personas person = null;
@@ -50,16 +58,16 @@ public class ActivityList extends AppCompatActivity {
         lista = new ArrayList<Personas>();
 
         //Cursos para recorrer los datos de la tabla selectAllPerson es un escript creado, null no requiere argumentos que mandarle
-        Cursor cursor = db.rawQuery(Trans.SelectAllPerson, nul);
+        Cursor cursor = db.rawQuery(Trans.SelectAllPerson, null);
 
-        //hay que moverse dentro del cursos
+        //hay que moverse dentro del cursor
         while (cursor.moveToNext())
         {
             //aqui vamos a utilizar el constructor vacio que creamos
             person = new Personas();
             //0 es la primera posicion o sea el id inicia en posicion 0, nombres posicion 1, etc...
             person.setId(cursor.getInt(0));
-            person.setNombres(cursor.getString()1));
+            person.setNombres(cursor.getString(1));
             person.setApellidos(cursor.getString(2));
             person.setEdad(cursor.getInt(3));
             person.setCorreo(cursor.getString(4));
@@ -69,7 +77,25 @@ public class ActivityList extends AppCompatActivity {
 
         }
 
+        //cerrar curso
+        cursor.close();
 
+        FillDate();
+    }
+
+    private void FillDate()
+    {
+        Arreglo = new ArrayList<String>();
+        //recorrer el arreglo
+        for(int i=0; i < lista.size(); i++)
+        {
+            //llenar informacion
+            Arreglo.add(lista.get(i).getId() + " "+
+                    lista.get(i).getNombres() + " "+
+                    lista.get(i).getApellidos());
+        }
 
     }
+
+
 }
