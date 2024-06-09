@@ -64,6 +64,7 @@ public class ActivityInit extends AppCompatActivity
 
             Long resultado = db.insert(Trans.TablePersonas, Trans.id, valores);
 
+
             Toast.makeText(getApplicationContext(), "Registro ingresado con exito" + resultado.toString(),
                     Toast.LENGTH_LONG).show();
 
