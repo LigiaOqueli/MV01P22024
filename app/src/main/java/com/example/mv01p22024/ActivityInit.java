@@ -1,5 +1,7 @@
 package com.example.mv01p22024;
 
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,6 +13,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import Configuracion.SQLLiteConexion;
+import Configuracion.Trans;
 
 public class ActivityInit extends AppCompatActivity
 {
@@ -47,6 +52,30 @@ public class ActivityInit extends AppCompatActivity
 
     private void Agregar()
     {
-        Toast.makeText(this, "Hola como estas!!!!"+nombres.getText(), Toast.LENGTH_LONG).show();
+        try {
+            SQLLiteConexion conexion = new SQLLiteConexion(this, Trans.DBname, null, Trans.Version);
+            SQLiteDatabase db = conexion.getReadableDatabase();
+
+            ContentValues valores = new ContentValues();
+            valores.put(Trans.nombres, nombres.getText().toString());
+            valores.put(Trans.apellidos, apellidos.getText().toString());
+            valores.put(Trans.edad, edad.getText().toString());
+            valores.put(Trans.correo, correo.getText().toString());
+
+            Long resultado = db.insert(Trans.TablePersonas, Trans.id, valores);
+
+            Toast.makeText(getApplicationContext(), "Registro ingresado con exito" + resultado.toString(),
+                    Toast.LENGTH_LONG).show();
+
+            db.close();
+        }
+        catch (Exception ex)
+        {
+            ex.toString();
+        }
+        //esto lo usamos sin el try y catch
+        //Toast.makeText(this, "Hola como estas!!!!"+nombres.getText(), Toast.LENGTH_LONG).show();
+
+
     }
 }

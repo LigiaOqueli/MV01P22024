@@ -1,6 +1,10 @@
 package Configuracion;
 
 public class Trans {
+
+    //Version database
+    public static final int Version = 1;
+
     //Nombre de la base de datos
     public static final String DBname = "PM12P";
 
@@ -18,6 +22,10 @@ public class Trans {
     // DDL Crear objetos de BD
     public static final String CreateTablePersonas = "CREATE TABLE " + TablePersonas + " ( " +
             "id INTEGER PRIMARY KEY AUTOINCREMENT, nombres TEXT, apellidos TEXT, edad INTEGER, correo TEXT, foto TEXT )";
+
+    public static final String SelectAllPerson = "SELECT * FROM " +  TablePersonas;
+
+    public static final String DropTablePersonas = "DROP TABLE IF EXISTS " + TablePersonas;
 
 
 
