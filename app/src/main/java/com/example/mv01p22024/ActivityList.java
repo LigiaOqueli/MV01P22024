@@ -3,8 +3,11 @@ package com.example.mv01p22024;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -47,6 +50,15 @@ public class ActivityList extends AppCompatActivity {
         ArrayAdapter adp = new ArrayAdapter(this, android.R.layout.simple_list_item_1, Arreglo);
         listperson.setAdapter(adp);
 
+        //para declarar una nueva lista adapter
+        listperson.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String ElementoSeleccionado = (String) parent.getItemAtPosition(position);
+
+                Toast.makeText(getApplicationContext(), ElementoSeleccionado, Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     private void ObtenerInfo() {
@@ -57,7 +69,7 @@ public class ActivityList extends AppCompatActivity {
         //nueva instancia
         lista = new ArrayList<Personas>();
 
-        //Cursos para recorrer los datos de la tabla selectAllPerson es un escript creado, null no requiere argumentos que mandarle
+        //Cursor para recorrer los datos de la tabla selectAllPerson es un escript creado, null no requiere argumentos que mandarle
         Cursor cursor = db.rawQuery(Trans.SelectAllPerson, null);
 
         //hay que moverse dentro del cursor
