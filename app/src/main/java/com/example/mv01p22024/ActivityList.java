@@ -92,10 +92,10 @@ public class ActivityList extends AppCompatActivity {
         //cerrar curso
         cursor.close();
 
-        FillDate();
+        FillData();
     }
 
-    private void FillDate()
+    private void FillData()
     {
         Arreglo = new ArrayList<String>();
         //recorrer el arreglo
